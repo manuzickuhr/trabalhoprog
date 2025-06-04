@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro</title>
+</head>
+<body>
+
+    <header>
+        <nav>
+            <ul>
+                <a href="{{ url_for("home") }}"><li> Home</li></a>
+                <a href="{{ url_for("sobre") }}"><li> Sobre nós</li></a>
+                <a href="{{ url_for("cadastro") }}"><li> Cadastro</li></a>
+                <a href="{{ url_for("listagem") }}"><li> Listagem</li></a>
+
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+
+        <h1>Cadastro</h1>
+
+        <form action="{{ url_for('form')}}" >
+
+            <label for="nome">Nome</label><br>
+            <input type="text" id="nome" name="nome" required><br>
+
+            <label for="idpokedex">Número da Pokédex</label><br>
+            <input type="text" id="idpokedex" name="idpokedex" required><br>
+
+            <label for="tipo_primario">Tipo Primário</label><br>
+            <input list="tipos" id="tipo_primario" name="tipo_primario" autocomplete="off" required><br>
+
+            <datalist id="tipos">
+            <option value="Normal">
+            <option value="Fogo">
+            <option value="Água">
+            <option value="Elétrico">
+            <option value="Grama">
+            <option value="Gelo">
+            <option value="Lutador">
+            <option value="Veneno">
+            <option value="Terrestre">
+            <option value="Voador">
+            <option value="Psíquico">
+            <option value="Inseto">
+            <option value="Pedra">
+            <option value="Fantasma">
+            <option value="Dragão">
+            <option value="Sombrio">
+            <option value="Aço">
+            <option value="Fada">
+            </datalist>
+
+            <label for="tipo_secundario">Tipo Secundário</label><br>
+            <input list="tipos" id="tipo_secundario" name="tipo_secundario" autocomplete="off" required><br>
+
+            <datalist id="tipos">
+            <option value="Normal">
+            <option value="Fogo">
+            <option value="Água">
+            <option value="Elétrico">
+            <option value="Grama">
+            <option value="Gelo">
+            <option value="Lutador">
+            <option value="Veneno">
+            <option value="Terrestre">
+            <option value="Voador">
+            <option value="Psíquico">
+            <option value="Inseto">
+            <option value="Pedra">
+            <option value="Fantasma">
+            <option value="Dragão">
+            <option value="Sombrio">
+            <option value="Aço">
+            <option value="Fada">
+            </datalist>
+
+            <label for="geracao">Geração</label><br>
+            <select id="geracao" name="geracao" required>
+                <option value="" disabled selected>Selecione a geração</option>
+                <option value="1">Geração I (Kanto)</option>
+                <option value="2">Geração II (Johto)</option>
+                <option value="3">Geração III (Hoenn)</option>
+                <option value="4">Geração IV (Sinnoh)</option>
+                <option value="5">Geração V (Unova)</option>
+                <option value="6">Geração VI (Kalos)</option>
+                <option value="7">Geração VII (Alola)</option>
+                <option value="8">Geração VIII (Galar)</option>
+                <option value="9">Geração IX (Paldea)</option>
+            </select>
+
+            <br>
+
+            <label for="regiao">Região</label><br>
+            <select id="regiao" name="regiao" required>
+                <option value="" disabled selected>Selecione a região</option>
+                <option value="kanto">Kanto</option>
+                <option value="johto">Johto</option>
+                <option value="hoenn">Hoenn</option>
+                <option value="sinnoh">Sinnoh</option>
+                <option value="unova">Unova</option>
+                <option value="kalos">Kalos</option>
+                <option value="alola">Alola</option>
+                <option value="galar">Galar</option>
+                <option value="paldea">Paldea</option>
+            </select> <br>
+
+            <label>Gênero</label><br>
+
+            <input type="radio" id="masculino" name="genero" value="masculino" required>
+            <label for="masculino">Masculino</label><br>
+
+            <input type="radio" id="feminino" name="genero" value="feminino">
+            <label for="feminino">Feminino</label><br>
+
+            <input type="radio" id="ambos" name="genero" value="ambos">
+            <label for="ambos">Masculino e Feminino</label><br>
+
+            <input type="radio" id="sem_genero" name="genero" value="sem_genero"required>
+            <label for="sem_genero">Sem gênero</label><br>
+
+
+
+            <label>Possui Evolução?</label> <br>
+            <input type="radio" id="sim" name="evolucao" value="S" required>
+            <label for="sim">SIM</label>
+
+            <input type="radio" id="nao" name="evolucao" value="N">
+            <label for="nao">Não</label><br>
+
+            <label for="evolui_de">Evolui de</label><br>
+            <input type="text" id="evolui_de" name="evolui_de" list="pokemons" placeholder="Digite o nome ou ID do Pokémon de evolução anterior"><br><br>
+
+            <label for="evolui_para">Evolui para</label><br>
+            <input type="text" id="evolui_para" name="evolui_para" list="pokemons" placeholder="Digite o nome ou ID do Pokémon para o qual evolui"><br><br>
+
+            <datalist id="pokemons">
+                <option value="001 - Bulbasaur"></option>
+            </datalist>
+
+            <label for="imagem">URL da Imagem</label><br>
+            <input type="url" id="imagem" name="imagem" placeholder="https://exemplo.com/imagem.png" required><br>
+
+            <button>Cadastrar!!!</button>
+
+        </form>
+
+    </main>
+    
+</body>
+</html>

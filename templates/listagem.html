@@ -23,6 +23,38 @@
 
         <h1>Listagem</h1>
 
+        <table>
+            <tr>
+                <th>Nome</th>
+                <th>Nº Pokédex</th>
+                <th>Tipo Primário</th>
+                <th>Tipo Secundário</th>
+                <th>Geração</th>
+                <th>Região</th>
+                <th>Gênero</th>
+                <th>Tem Evolução</th>
+                <th>Evolui de</th>
+                <th>Imagem</th>
+                <th>Data de Cadastro</th>
+            </tr>
+            {% for pokemon in pokemons %}
+            <tr>
+                <td>{{ pokemon.nome }}</td>
+                <td>{{ pokemon.idpokedex }}</td>
+                <td>{{ pokemon.tipo_primario }}</td>
+                <td>{{ pokemon.tipo_secundario }}</td>
+                <td>{{ pokemon.geracao }}</td>
+                <td>{{ pokemon.regiao }}</td>
+                <td>{{ pokemon.genero }}</td>
+                <td>{{ pokemon.tem_evolucao }}</td>
+                <td>{{ pokemon.evolui_de }}</td>
+                <td><img src="{{ pokemon.imagem }}" width="100"></td>
+                <td>{{ pokemon.data_cadastro.strftime("%Y-%m-%d") }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+
+
     </main>
 
 </body>

@@ -23,7 +23,7 @@
 
         <h1>Cadastro</h1>
 
-        <form action="{{ url_for('form')}}" >
+        <form action="{{ url_for('adicionar_pokemon')}}" >
 
             <label for="nome">Nome</label><br>
             <input type="text" id="nome" name="nome" required><br>
@@ -53,6 +53,7 @@
             <option value="Sombrio">
             <option value="Aço">
             <option value="Fada">
+            <option value="Planta">
             </datalist>
 
             <label for="tipo_secundario">Tipo Secundário</label><br>
@@ -77,6 +78,7 @@
             <option value="Sombrio">
             <option value="Aço">
             <option value="Fada">
+            <option value="Planta">
             </datalist>
 
             <label for="geracao">Geração</label><br>
@@ -126,17 +128,20 @@
 
 
             <label>Possui Evolução?</label> <br>
-            <input type="radio" id="sim" name="evolucao" value="S" required>
+            <input type="radio" id="sim" name="tem_evolucao" value="S" required>
             <label for="sim">SIM</label>
 
-            <input type="radio" id="nao" name="evolucao" value="N">
+            <input type="radio" id="nao" name="tem_evolucao" value="N">
             <label for="nao">Não</label><br>
 
             <label for="evolui_de">Evolui de</label><br>
             <input type="text" id="evolui_de" name="evolui_de" list="pokemons" placeholder="Digite o nome ou ID do Pokémon de evolução anterior"><br><br>
 
-            <label for="evolui_para">Evolui para</label><br>
-            <input type="text" id="evolui_para" name="evolui_para" list="pokemons" placeholder="Digite o nome ou ID do Pokémon para o qual evolui"><br><br>
+            <datalist id="pokemons">
+                {% for p in pokemons %}
+                    <option value="{{ p.id }}">{{ p.nome }}</option>
+                {% endfor %}
+            </datalist>
 
             <datalist id="pokemons">
                 <option value="001 - Bulbasaur"></option>

@@ -5,12 +5,11 @@ class Pokemon(db.Entity):
     idpokedex = Required(int)
     tipo_primario = Required(str)
     tipo_secundario = Optional(str)
-    geracao = Required(str)
+    geracao = Required(int)
     regiao = Required(str)
     genero = Required(str)
     tem_evolucao = Required(bool)
     evolui_de = Optional(int)
-    evolui_para = Optional(int)
     imagem = Required(str)
     data_cadastro = Required(datetime, default=datetime.now)
 
@@ -19,7 +18,7 @@ class Pokemon(db.Entity):
         evolui_para = self.evolui_para.nome if self.evolui_para else "Nenhuma"
         return (f"{self.nome} (ID: {self.idpokedex}) - Tipos: {self.tipo_primario}"
             f"{' / ' + self.tipo_secundario if self.tipo_secundario else ''} | "
-            f"Evolui de: {evolui_de} | Evolui para: {evolui_para}")
+            f"Evolui de: {evolui_de}")
     
     def json(self):
          return {
@@ -32,7 +31,6 @@ class Pokemon(db.Entity):
               "genero": self.genero,
               "tem_evolucao": self.tem_evolucao,
               "evolui_de": self.evolui_de,
-              "evolui_para": self.evolui_para,
               "imagem": self.imagem,
               "data_cadastro": self.data_cadastro.date().isoformat(),
          }

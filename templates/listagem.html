@@ -35,6 +35,7 @@
                 <th>Tem Evolução</th>
                 <th>Evolui de</th>
                 <th>Imagem</th>
+                <th></th>
                 <th>Data de Cadastro</th>
             </tr>
             {% for pokemon in pokemons %}
@@ -49,13 +50,27 @@
                 <td>{{ pokemon.tem_evolucao }}</td>
                 <td>{{ pokemon.evolui_de }}</td>
                 <td><img src="{{ pokemon.imagem }}" width="100"></td>
+                <td><a href="#" class="btn-fundo" data-imagem="{{ pokemon.imagem }}">Usar imagem de fundo</a></td>
                 <td>{{ pokemon.data_cadastro.strftime("%Y-%m-%d") }}</td>
             </tr>
             {% endfor %}
         </table>
-
-
     </main>
+
+    <script>
+  // Seleciona todos os links com a classe btn-fundo
+  document.querySelectorAll('.btn-fundo').forEach(link => {
+    link.addEventListener('click', function(event) {
+      event.preventDefault(); // não navega no link
+
+      const urlImagem = this.getAttribute('data-imagem');
+      if(urlImagem) {
+        document.body.style.backgroundImage = `url('${urlImagem}')`;
+      }
+    });
+  });
+</script>
+
 
 </body>
 </html>

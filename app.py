@@ -20,7 +20,7 @@ def cadastro():
 def listagem():
     with db_session:
         pokemons = Pokemon.select() 
-        return render_template("listagem.html", pokemons=pokemons)
+        return render_template("listagem.html", pokemons=pokemons)     
 
 @app.route("/adicionar_pokemon")
 def adicionar_pokemon():
@@ -48,6 +48,7 @@ def adicionar_pokemon():
             evolui_de=int(evolui_de) if evolui_de else None,
             imagem=imagem
         )
+
 
 
         commit()

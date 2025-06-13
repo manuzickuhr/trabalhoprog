@@ -19,7 +19,7 @@ def cadastro():
         pokemons = list(Pokemon.select())
         return render_template('cadastro.html', pokemons=pokemons)
 
-@app.route("/listagem")
+@app.route("/listagem", methods=["GET"])
 def listagem():
     with db_session:
         pokemons = Pokemon.select()
@@ -37,7 +37,10 @@ def adicionar_pokemon():
         regiao = request.form.get("regiao")
         genero = request.form.get("genero")
         tem_evolucao = request.form.get("tem_evolucao")
-        evolui_de = request.form.get("evolui_de")
+        try:
+            evolui_de = int(request.form["evolui_de"])
+        except (ValueError, TypeError):
+            evolui_de = None
         imagem = request.form.get("imagem")
 
         with db_session:

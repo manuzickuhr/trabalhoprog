@@ -86,7 +86,13 @@ def atualizar_pokemon():
         pokemon.regiao = request.form["regiao"]
         pokemon.genero = request.form["genero"]
         pokemon.tem_evolucao = request.form["tem_evolucao"]
-        pokemon.evolui_de = int(request.form["evolui_de"]) if request.form["evolui_de"] else None
+        #pokemon.evolui_de = int(request.form["evolui_de"]) if request.form["evolui_de"] else None
+        # Tentativa de conversão para int, se falhar, define como None, antes ele tentava converter o none para int que dava erro
+        try:
+            pokemon.evolui_de = int(request.form["evolui_de"])
+        except (ValueError, TypeError):
+            pokemon.evolui_de = None
+        
         pokemon.imagem = request.form["imagem"]
 
         commit()

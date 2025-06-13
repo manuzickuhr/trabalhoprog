@@ -28,8 +28,7 @@
         <label for="nome">Nome</label><br>
         <input type="text" id="nome" name="nome" value="{{ pokemon.nome }}" required><br>
 
-        <label for="idpokedex">Número da Pokédex</label><br>
-        <input type="text" id="idpokedex" name="idpokedex" value="{{ pokemon.idpokedex }}" required><br>
+        <label for="idpokedex">Número da Pokédex : {{ pokemon.idpokedex }}</label><br><br>
 
         <label for="tipo_primario">Tipo Primário</label><br>
         <input list="tipos" id="tipo_primario" name="tipo_primario" value="{{ pokemon.tipo_primario }}" required><br>

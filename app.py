@@ -72,35 +72,39 @@ def editar_pokemon(id):
         pokemons = Pokemon.select()
         return render_template("editar.html", pokemon=pokemon, pokemons=pokemons)
 
-@app.route("/atualizar", methods=["POST"])
+@app.route('/atualizar_pokemon', methods=['POST'])
 def atualizar_pokemon():
-    id = int(request.form["id"])
-    
     with db_session:
-        pokemon = Pokemon.get(id=id)
+        pokemon_id = request.form.get('id')
+        if not pokemon_id:
+            return "ID do Pokémon não enviado", 400
+
+        pokemon = Pokemon.get(id=int(pokemon_id))
         if not pokemon:
             return "Pokémon não encontrado", 404
 
-        pokemon.nome = request.form["nome"]
-        pokemon.idpokedex = int(request.form["idpokedex"]) if request.form["idpokedex"] else None
-        pokemon.tipo_primario = request.form["tipo_primario"]
-        pokemon.tipo_secundario = request.form["tipo_secundario"]
-        pokemon.geracao = int(request.form["geracao"]) if request.form["geracao"] else None
-        pokemon.regiao = request.form["regiao"]
-        pokemon.genero = request.form["genero"]
-        pokemon.tem_evolucao = request.form["tem_evolucao"]
-        #pokemon.evolui_de = int(request.form["evolui_de"]) if request.form["evolui_de"] else None
-        # Tentativa de conversão para int, se falhar, define como None, antes ele tentava converter o none para int que dava erro
+        pokemon.nome = request.form.get('nome')
+        pokemon.tipo_primario = request.form.get('tipo_primario')
+
+        tipo_secundario = request.form.get('tipo_secundario')
+        pokemon.tipo_secundario = tipo_secundario if tipo_secundario else None
+
+        pokemon.geracao = int(request.form.get('geracao'))
+        pokemon.regiao = request.form.get('regiao')
+        pokemon.genero = request.form.get('genero')
+
+        # tem_evolucao vem como 'True' ou 'False' string do formulário
+        pokemon.tem_evolucao = request.form.get('tem_evolucao') == 'S'
+
         try:
             pokemon.evolui_de = int(request.form["evolui_de"])
         except (ValueError, TypeError):
             pokemon.evolui_de = None
-        
-        pokemon.imagem = request.form["imagem"]
 
-        commit()
+        pokemon.imagem = request.form.get('imagem')
 
-    return redirect(url_for("listagem"))
+    return redirect(url_for('listagem'))
+
 
 @app.route('/excluir/<int:id>')
 def excluir_pokemon(id):

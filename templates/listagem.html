@@ -1,63 +1,77 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
     <title>Listagem</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
 </head>
 <body>
 
-    <header>
-        <nav>
-            <ul>
-                <a href="{{ url_for("home") }}"><li> Home</li></a>
-                <a href="{{ url_for("sobre") }}"><li> Sobre nós</li></a>
-                <a href="{{ url_for("cadastro") }}"><li> Cadastro</li></a>
-                <a href="{{ url_for("listagem") }}"><li> Listagem</li></a>
+<header>
+    <nav>
+        <ul>
+            <a href="{{ url_for('home') }}"><li> Home</li></a>
+            <a href="{{ url_for('sobre') }}"><li> Sobre nós</li></a>
+            <a href="{{ url_for('cadastro') }}"><li> Cadastro</li></a>
+            <a href="{{ url_for('listagem') }}"><li> Listagem</li></a>
+        </ul>
+    </nav>
+</header>
 
-            </ul>
-        </nav>
-    </header>
-    
-    <main>
+<main>
 
-        <h1>Listagem</h1>
+    <h1>Listagem</h1>
 
-        <table>
-            <tr>
-                <th>Nome</th>
-                <th>Nº Pokédex</th>
-                <th>Tipo Primário</th>
-                <th>Tipo Secundário</th>
-                <th>Geração</th>
-                <th>Região</th>
-                <th>Gênero</th>
-                <th>Tem Evolução</th>
-                <th>Evolui de</th>
-                <th>Imagem</th>
-                <th></th>
-                <th>Data de Cadastro</th>
-            </tr>
-            {% for pokemon in pokemons %}
-            <tr>
-                <td>{{ pokemon.nome }}</td>
-                <td>{{ pokemon.idpokedex }}</td>
-                <td>{{ pokemon.tipo_primario }}</td>
-                <td>{{ pokemon.tipo_secundario }}</td>
-                <td>{{ pokemon.geracao }}</td>
-                <td>{{ pokemon.regiao }}</td>
-                <td>{{ pokemon.genero }}</td>
-                <td>{{ pokemon.tem_evolucao }}</td>
-                <td>{{ pokemon.evolui_de }}</td>
-                <td><img src="{{ pokemon.imagem }}" width="100"></td>
-                <td><a href="#" class="btn-fundo" data-imagem="{{ pokemon.imagem }}">Usar imagem de fundo</a></td>
-                <td>{{ pokemon.data_cadastro.strftime("%Y-%m-%d") }}</td>
-            </tr>
-            {% endfor %}
-        </table>
-    </main>
+    <table>
+        <tr>
+            <th>Nome</th>
+            <th>Nº Pokédex</th>
+            <th>Tipo Primário</th>
+            <th>Tipo Secundário</th>
+            <th>Geração</th>
+            <th>Região</th>
+            <th>Gênero</th>
+            <th>Tem Evolução</th>
+            <th>Evolui de</th>
+            <th>Imagem</th>
+            <th>Usar fundo</th>
+            <th>Data de Cadastro</th>
+            <th>Editar</th>
+            <th>Excluir</th>
+        </tr>
+        {% for pokemon in pokemons %}
+        <tr>
+            <td>{{ pokemon.nome }}</td>
+            <td>{{ pokemon.idpokedex }}</td>
+            <td>{{ pokemon.tipo_primario }}</td>
+            <td>{{ pokemon.tipo_secundario }}</td>
+            <td>{{ pokemon.geracao }}</td>
+            <td>{{ pokemon.regiao }}</td>
+            <td>{{ pokemon.genero }}</td>
+            <td>{{ pokemon.tem_evolucao }}</td>
+            <td>{{ pokemon.evolui_de }}</td>
+            <td><img src="{{ pokemon.imagem }}" width="100" alt="Imagem de {{ pokemon.nome }}" /></td>
+            <td><a href="#" class="btn-fundo" data-imagem="{{ pokemon.imagem }}">Usar imagem de fundo</a></td>
+            <td>{{ pokemon.data_cadastro.strftime("%Y-%m-%d") }}</td>
+            <td>
+                <a href="{{ url_for('editar_pokemon', id=pokemon.id) }}">
+                    <i class="fa-solid fa-pen-to-square"></i>
+                </a>
+            </td>
+            <td>
+                <a href="{{ url_for('excluir_pokemon', id=pokemon.id) }}" onclick="return confirm('Tem certeza que deseja excluir este Pokémon?');">
+                    <i class="fa-solid fa-trash"></i>
+                </a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
 
-    <script>
+</main>
+
+<script>
   // Seleciona todos os links com a classe btn-fundo
   document.querySelectorAll('.btn-fundo').forEach(link => {
     link.addEventListener('click', function(event) {
@@ -65,12 +79,11 @@
 
       const urlImagem = this.getAttribute('data-imagem');
       if(urlImagem) {
-        document.body.style.backgroundImage = `url('${urlImagem}')`;
+        document.body.style.backgroundImage = `url('${urlImagem}')`;   
       }
     });
   });
 </script>
-
 
 </body>
 </html>

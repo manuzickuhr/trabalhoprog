@@ -4,6 +4,59 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sobre Nós</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <style>
+        /* Estilo para a página "Sobre Nós" */
+
+        main {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 25px;
+            background-color: #ffffffdd;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            color: #333;
+            line-height: 1.6;
+        }
+
+        main h1, main h2 {
+            text-align: center;
+            color: #3a8dde;
+        }
+
+        main ul {
+            list-style-type: disc;
+            padding-left: 40px;
+            margin-top: 10px;
+        }
+
+        main li {
+            margin: 5px 0;
+            font-size: 16px;
+        }
+
+        main p {
+            margin-bottom: 20px;
+            text-align: justify;
+            font-size: 17px;
+        }
+
+        /* Responsividade básica */
+        @media (max-width: 600px) {
+            main {
+                padding: 15px;
+            }
+
+            main h1, main h2 {
+                font-size: 22px;
+            }
+
+            main p, main li {
+                font-size: 15px;
+            }
+        }
+
+    </style>
 </head>
 <body>
 
@@ -23,6 +76,33 @@
 
         <h1>Sobre Nós</h1>
 
+        <p>
+            Nosso grupo é formado por estudantes com interesse e dedicação na área de programação.
+            Reunimos diferentes habilidades, como lógica, criatividade, organização e pensamento analítico, 
+            essenciais para o desenvolvimento de soluções eficientes e inovadoras.
+        </p>
+
+        <h2>Integrantes:</h2>
+        <ul>
+            <li>Clara Machado Venturi</li>
+            <li>Manuela Lopes Zickuhr</li>
+            <li>Noah Tomasini do Nascimento</li>
+            <li>Sophia Pavese Volani</li>
+            <li>Victor Alexandre Cerutti</li>
+            <li>Vinícius Sombrio Fronza</li>
+        </ul>
+
+        <img src="{{ url_for('static', filename='img/integrantes.png') }}" alt="Foto dos integrantes do grupo">
+
+
+        <p>
+            Nosso grupo compartilha um interesse em comum: o universo Pokémon. Desde os jogos até os personagens e histórias, 
+            esse tema sempre despertou nossa curiosidade e entusiasmo. Os Pokémon possuem uma grande variedade de características, 
+            como tipos, habilidades, evoluções e estatísticas — elementos que se encaixam perfeitamente na proposta do nosso trabalho, 
+            que envolve organização de dados, lógica de programação e interação entre elementos. Por isso, decidimos desenvolver nosso 
+            projeto inspirado nesse universo, unindo diversão e aprendizado para criar algo que represente nosso gosto pessoal e nossas habilidades técnicas.
+        </p>
+        
     </main>
     
 </body>

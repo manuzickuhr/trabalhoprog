@@ -4,24 +4,100 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <style>
+        /* Estilo para a página "Sobre Nós" */
+
+        main {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 25px;
+            background-color: #ffffffdd;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            color: #333;
+            line-height: 1.6;
+        }
+
+        main h1, main h2 {
+            text-align: center;
+            color: #3a8dde;
+        }
+
+        main ul {
+            list-style-type: disc;
+            padding-left: 40px;
+            margin-top: 10px;
+        }
+
+        main li {
+            margin: 5px 0;
+            font-size: 16px;
+        }
+
+        main p {
+            margin-bottom: 20px;
+            text-align: justify;
+            font-size: 17px;
+        }
+
+        /* Responsividade básica */
+        @media (max-width: 600px) {
+            main {
+                padding: 15px;
+            }
+
+            main h1, main h2 {
+                font-size: 22px;
+            }
+
+            main p, main li {
+                font-size: 15px;
+            }
+        }
+
+    </style>
 </head>
 <body>
 
     <header>
         <nav>
             <ul>
-                <a href="{{ url_for("home") }}"><li> Home</li></a>
-                <a href="{{ url_for("sobre") }}"><li> Sobre nós</li></a>
-                <a href="{{ url_for("cadastro") }}"><li> Cadastro</li></a>
-                <a href="{{ url_for("listagem") }}"><li> Listagem</li></a>
-
+                <a href="{{ url_for('home') }}"><li> Home</li></a>
+                <a href="{{ url_for('sobre') }}"><li> Sobre nós</li></a>
+                <a href="{{ url_for('cadastro') }}"><li> Cadastro</li></a>
+                <a href="{{ url_for('listagem') }}"><li> Listagem</li></a>
             </ul>
         </nav>
     </header>
 
     <main>
 
-        <h1>Página Principal</h1>
+        <h1>Bem-vindo ao PokéDex Manager</h1>
+
+        <p>
+            Este é um projeto desenvolvido por estudantes apaixonados por programação e pelo universo Pokémon.
+            Aqui, você poderá cadastrar, listar e editar Pokémon com suas características principais, como tipos,
+            geração, região e se possuem ou não evolução.
+        </p>
+
+        <p>
+            Nossa aplicação é inspirada no funcionamento de uma Pokédex real, mas com o toque de lógica, organização
+            e interatividade que só a programação pode proporcionar.
+        </p>
+
+        <h2>Funcionalidades:</h2>
+        <ul>
+            <li>Cadastrar novos Pokémon com todos os seus dados</li>
+            <li>Editar e atualizar informações já registradas</li>
+            <li>Visualizar uma lista organizada de Pokémon</li>
+        </ul>
+
+        <p style="text-align: center; margin-top: 30px;">
+            <a href="{{ url_for('cadastro') }}" style="background-color: #3a8dde; color: white; padding: 10px 20px; text-decoration: none; border-radius: 8px;">
+                Comece agora!
+            </a>
+        </p>
 
     </main>
     

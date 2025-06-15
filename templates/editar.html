@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Editar Pokémon</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+</head>
+<body>
+
+<header>
+    <nav>
+        <ul>
+            <a href="{{ url_for('home') }}"><li> Home</li></a>
+            <a href="{{ url_for('sobre') }}"><li> Sobre nós</li></a>
+            <a href="{{ url_for('cadastro') }}"><li> Cadastro</li></a>
+            <a href="{{ url_for('listagem') }}"><li> Listagem</li></a>
+        </ul>
+    </nav>
+</header>
+
+<main>
+    <h1>Editar Pokémon</h1>
+
+    <form action="{{ url_for('atualizar_pokemon') }}" method="POST">
+
+        <input type="hidden" name="id" value="{{ pokemon.id }}" />
+
+        <label for="nome">Nome</label><br>
+        <input type="text" id="nome" name="nome" value="{{ pokemon.nome }}" required><br>
+
+        <label for="idpokedex">Número da Pokédex</label><br>
+        <input type="text" id="idpokedex" name="idpokedex" value="{{ pokemon.idpokedex }}" readonly><br>
+
+        <label for="tipo_primario">Tipo Primário</label><br>
+        <input list="tipos" id="tipo_primario" name="tipo_primario" autocomplete="off" value="{{ pokemon.tipo_primario }}" required><br>
+
+        <label for="tipo_secundario">Tipo Secundário</label><br>
+        <input list="tipos" id="tipo_secundario" name="tipo_secundario" autocomplete="off" value="{{ pokemon.tipo_secundario }}" required><br>
+
+        <datalist id="tipos">
+            <option value="Normal">
+            <option value="Fogo">
+            <option value="Água">
+            <option value="Elétrico">
+            <option value="Grama">
+            <option value="Gelo">
+            <option value="Lutador">
+            <option value="Veneno">
+            <option value="Terrestre">
+            <option value="Voador">
+            <option value="Psíquico">
+            <option value="Inseto">
+            <option value="Pedra">
+            <option value="Fantasma">
+            <option value="Dragão">
+            <option value="Sombrio">
+            <option value="Aço">
+            <option value="Fada">
+            <option value="Planta">
+        </datalist>
+
+        <label for="geracao">Geração</label><br>
+        <select id="geracao" name="geracao" value="{{ pokemon.geracao }}" required>
+            {% for i in range(1, 10) %}
+                <option value="{{ i }}" {% if pokemon.geracao == i|string %}selected{% endif %}>
+                    Geração {{ i }} ({{ ["Kanto", "Johto", "Hoenn", "Sinnoh", "Unova", "Kalos", "Alola", "Galar", "Paldea"][i-1] }})
+                </option>
+            {% endfor %}
+        </select><br>
+
+        <label for="regiao">Região</label><br>
+        <select id="regiao" name="regiao" value="{{ pokemon.regiao }}" required>
+           {% for r in ["kanto", "johto", "hoenn", "sinnoh", "unova", "kalos", "alola", "galar", "paldea"] %}
+                <option value="{{ r }}" {% if pokemon.regiao == r %}selected{% endif %}>{{ r.capitalize() }}</option>
+            {% endfor %}
+        </select> <br>
+
+        <label>Gênero</label><br>
+
+        <input type="radio" id="masculino" name="genero" value="masculino" {% if pokemon.genero == 'masculino' %}checked{% endif %} required>
+        <label for="masculino">Masculino</label><br>
+
+        <input type="radio" id="feminino" name="genero" value="feminino" {% if pokemon.genero == 'feminino' %}checked{% endif %}>
+        <label for="feminino">Feminino</label><br>
+
+        <input type="radio" id="ambos" name="genero" value="ambos" {% if pokemon.genero == 'ambos' %}checked{% endif %}>
+        <label for="ambos">Masculino e Feminino</label><br>
+
+        <input type="radio" id="sem_genero" name="genero" value="sem_genero" {% if pokemon.genero == 'sem_genero' %}checked{% endif %} required>
+        <label for="sem_genero">Sem gênero</label><br>
+
+        <label>Possui Evolução?</label><br>
+
+        <input type="radio" id="sim" name="tem_evolucao" value="S" {% if pokemon.tem_evolucao %}checked{% endif %} required>
+        <label for="sim">SIM</label>
+
+        <input type="radio" id="nao" name="tem_evolucao" value="N" {% if not pokemon.tem_evolucao %}checked{% endif %}>
+        <label for="nao">Não</label><br>
+
+
+        <label for="evolui_de">Evolui de</label><br>
+        <input type="text" id="evolui_de" name="evolui_de" list="pokemons" placeholder="Digite o nome ou ID do Pokémon de evolução anterior" value="{{ pokemon.evolui_de }}"><br><br>
+
+        <datalist id="pokemons">
+            {% for p in pokemons %}
+                <option value="{{ p.id }}">{{ p.nome }}</option>
+            {% endfor %}
+        </datalist>
+
+        <label for="imagem">URL da Imagem</label><br>
+        <input type="url" id="imagem" name="imagem" placeholder="https://exemplo.com/imagem.png" value="{{ pokemon.imagem }}" required><br>
+
+        <button>Editar!!!</button>
+
+    </form>
+
+</main>
+
+</body>
+</html>
